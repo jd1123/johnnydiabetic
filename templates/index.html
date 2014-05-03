@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+		
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<!-- /span -->
+				<div class="hero-unit">
+					{% if user.is_authenticated %}
+					Welcome, {{ user.username }} <br>
+					Please check out the <a href="{% url 'basefunctions.views.about' %}">About</a> section. <br>
+					Or take a look at the <a href="{% url 'forum.views.forumlist' %}"> forum</a>.
+					{% else %}
+					Hi everyone. This is my site. Thanks for stopping by! <br>
+					Please check out the <a href="{% url 'basefunctions.views.about' %}">About</a> section.
+					{% endif %}
+				</div>
+				<!-- span -->
+			</div>
+			<!-- row -->
+		</div>
+		<!-- /.fluid-container -->
+
+{% endblock %}

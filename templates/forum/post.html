@@ -1,0 +1,14 @@
+{% block title %}{% endblock %}
+
+{% block body_block %}
+	<form id="post_form" method="POST" action="/forum/new_thread/{{ pk }}/">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+			{{ field.errors }}
+			{{ field.help_text }}
+			{{ field }}
+			<br />
+		{% endfor %}
+		<input type="submit" name="submit" value="Create Post" />
+	</form>
+{% endblock %}

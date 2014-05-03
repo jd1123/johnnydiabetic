@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}New Post{% endblock %}
+	{%block body_block %}
+	<div class="hero-unit">
+		<h3>New Post</h3>
+		<form id="new_post" method="post" action="/forum/new_thread/{{pk}}/">
+			{% csrf_token %}
+			<input type="text" name="subject" value="" size="20" maxlength="120" placeholder="Subject">
+			<br />
+			<div class="container">
+				<textarea name="body" rows="15" cols="80" maxlength="1500" placeholder="Message">
+				</textarea>
+			</div>
+			<br />
+			<input class="btn btn-primary" type="submit" value="post" />			
+		</form>
+	</div>
+{% endblock %}

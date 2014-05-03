@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_block %}
+	{% if posts %}
+	<div id="list">
+	<a href="{% url 'forum.views.forumlist' %}">Home</a> :: <a href="{%url 'forum.views.threadlist' forum_pk %}">{{forum_title}}</a> ::<a href="{%url 'forum.views.postlist' pk %}">{{ thread_title }}</a> :: <a href="{% url 'forum.views.reply' pk %}">Reply</a>
+	<br /><br />
+	</div>
+		{% for post in posts %}
+			<table class="table">
+				<tr>
+				<th>Subject: {{post.subject}}</th>
+				<th>Author: {{post.creator.username}}</th>
+				<th>Created at: {{post.created}}</th>
+				</tr>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</table>
+			<div class="container">
+				{{post.body}}
+			</div>
+			<br>
+		{% endfor %}
+	
+
+	{% endif %}
+
+{% endblock %}

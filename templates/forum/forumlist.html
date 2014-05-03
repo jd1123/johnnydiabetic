@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Forums
+{% endblock %}
+
+{% block body_block %}
+	{% if user.is_authenticated %}		
+		{% if forums %}
+		Forum List: <br /><br />
+		<table class="table table-hover">
+			<tr>
+				<th>Title</th>
+				<th>Most Recent Thread</th>
+			</tr>
+			{% for f in forums %}
+				<tr>
+					<td><a href = "{% url 'forum.views.threadlist' f.pk %}">{{ f.title }}</a></td>
+					<td>{{ f.last_post }}</td>
+				</tr>
+				
+			{% endfor %}
+			<tr><td></td><td></td></tr>
+		</table>
+		{% endif %}
+	{% else %}
+		<div class="hero-unit">
+			You are not logged in and therefore cannot see the forums
+		</div>
+	{% endif %}
+	
+{% endblock %}

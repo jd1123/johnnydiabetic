@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+{{forum_title}}
+{% endblock %}
+
+{% block body_block %}
+
+	<div id="list">
+	<table class="table table-hover">
+	<a href="{% url 'forum.views.forumlist' %}">Home</a> :: <a href="{%url 'forum.views.threadlist' pk %}">{{forum_title}}</a> :: <a href="{% url 'forum.views.new_post' pk %}">New Post</a>
+	{% if threads %}
+
+		<tr>
+			<th>Title</th>
+			<th>Created</th>
+			<th>Author</th>
+			<th></th>
+		</tr>
+		{% for thread in threads %}
+			<tr>
+			<td><a href = "{% url 'forum.views.postlist' thread.pk %}">{{ thread.title }}</a></td>
+			<td>{{ thread.created }}</td>
+			<td>{{thread.creator.username}}</td>
+			<td><a href="{% url 'forum.views.postlist' thread.pk %}">View</a></td>
+			</tr>
+		{% endfor %}
+	{% else %}
+	<br><br>
+	<div class="container">
+		There are no threads
+	</div>
+	{% endif %}
+	</table>
+	</div>
+{% endblock %}
