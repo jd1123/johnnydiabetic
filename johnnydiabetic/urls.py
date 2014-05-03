@@ -13,8 +13,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^forum/',include('forum.urls')),
     #url(r'^wedding/',include('weddingpics.urls')),
+    url(r'^file/(?P<filename>.*)$', views.retrieve_file, name="file"),
     url(r'^about/$', views.about, name="about"),
     url(r"^$", views.root, name = "root"),
     url(r'^login/$', views.user_login, name='login'),
     url(r'^logout/$', views.user_logout, name='logout'),
+    #url(r'^debug/$', views.debug, name = 'debug')
 )

@@ -18,6 +18,7 @@ def about(request):
     context = RequestContext(request)
     return render_to_response('about.html', context)
 
+# Login View
 def user_login(request):
     context = RequestContext(request)
     
@@ -38,12 +39,15 @@ def user_login(request):
             return HttpResponse("Invalid login details.")
     else:
         return render_to_response('login.html', {}, context)
-    
+
+# Logout View    
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+# this is to serve secure content
+# I admit, it was copied
 def get_absolute_filename(filename='', safe=True):
     if not filename:
         return os.path.join(SECURE_ROOT, 'index')
@@ -58,3 +62,6 @@ def retrieve_file(request, filename=''):
     del response['content-type'] # We'll let the web server guess this.
     response['X-Accel-Redirect'] = abs_filename
     return response
+
+#def debug(request):
+#    return render_to_response('debug.html')
