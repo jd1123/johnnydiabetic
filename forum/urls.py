@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, url
 from forum import views
-import basefunctions
 
 urlpatterns = patterns('',
                        url(r"^$",views.forumlist, name = "forumlist"),
