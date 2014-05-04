@@ -63,5 +63,6 @@ def retrieve_file(request, filename=''):
     response['X-Accel-Redirect'] = abs_filename
     return response
 
-#def debug(request):
-#    return render_to_response('debug.html')
+def debug(request):
+    context = RequestContext(request)
+    return render_to_response('debug.html', context)

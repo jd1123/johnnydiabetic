@@ -4,5 +4,4 @@ settings.py
 .project
 .pydevproject
 static/img/*
-
-
+*updates*.txt
