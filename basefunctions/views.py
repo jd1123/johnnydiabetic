@@ -26,6 +26,11 @@ def user_login(request):
         username = request.POST['username']
         password = request.POST['password']
         
+        # need to figure this out to send the user
+        # to the request path after logging in
+        #n_path = request.POST['n_path']
+        #print "next: " + str(n_path)
+        
         user = authenticate(username=username, password=password)
         
         if user is not None:

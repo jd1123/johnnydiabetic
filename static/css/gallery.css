@@ -1,0 +1,11 @@
+.gallery {
+	list-style: none;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+}
+
+.gallery li {
+	float: left;
+	width: 25%;
+}
