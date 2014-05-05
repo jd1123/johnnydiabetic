@@ -8,4 +8,5 @@
 .gallery li {
 	float: left;
 	width: 25%;
+	padding: 4px;
 }

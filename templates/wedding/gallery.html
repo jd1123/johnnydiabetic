@@ -12,8 +12,13 @@
 
 {% block body_block %}
 	<div class="hero-unit">
-		<ul class="gallery">
-			<li></li>
-		</ul>
+		{% if pics %}
+			<ul class="gallery">
+			{% for p in pics %}
+				<li>{% img_link p.pic_name %}</li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+				
 	</div>
 {% endblock %}
