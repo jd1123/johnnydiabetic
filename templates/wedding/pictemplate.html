@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %} {% endblock %}
+
+{% block body_block %}
+	<div class="hero-unit">
+		<center>{% secure_file pic_name %}</center> <br />
+		<center>{{ caption }}</center>
+	</div>
+{% endblock %}

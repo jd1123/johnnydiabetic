@@ -15,7 +15,7 @@
 		{% if pics %}
 			<ul class="gallery">
 			{% for p in pics %}
-				<li>{% img_link p.pic_name %}</li>
+				<li>{% secure_file p.pic_name %}</li>
 			{% endfor %}
 			</ul>
 		{% endif %}

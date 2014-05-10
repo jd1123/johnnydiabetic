@@ -5,17 +5,21 @@ import os
 register = template.Library()
 
 @register.simple_tag(takes_context=True)
-def secure_file(context, filename = None , class_string = None):
+def secure_file(context, filename = None , alt_text = None, class_string = None):
     html_string = ''
     if context['user_authenticated']:
         if filename:
-            no_ext = filename.split('.')[0]
             html_string += "<img "
             
             if class_string:
                 html_string += "class=" + class_string + " "
             
-            html_string += "src='" + os.path.join(SECURE_FILE_URL, filename) + "' alt='" +no_ext + "'>"
+            html_string += "src='" + os.path.join(SECURE_FILE_URL, filename) 
+            
+            if alt_text:
+                html_string+= "' alt='" + alt_text 
+            
+            html_string+= "'>"
             
     return html_string
 

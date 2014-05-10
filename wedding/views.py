@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.core.paginator import Paginator
 from wedding.models import WeddingPic
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 @login_required
@@ -22,8 +23,14 @@ def gallery(request):
 @login_required
 def pic(request, pic_name):
     context = RequestContext(request)
-    pic = WeddingPic.objects.get(pic_name = pic_name)
-    context_dict = {'pic_name': pic.pic_name}
-    context_dict['caption'] = pic.caption
-    #return render_to_response('wedding/pictemplate.html', context_dict, context)
-    return HttpResponse('Not Yet Implemented')
+    context_dict = {}
+    print pic_name
+    try:
+        pic = WeddingPic.objects.get(pic_name = pic_name)
+        context_dict['pic_name'] = pic.pic_name
+        context_dict['caption'] = pic.caption
+    except ObjectDoesNotExist:
+        return render_to_response('404.html', context_dict, context)
+        
+    return render_to_response('wedding/pictemplate.html', context_dict, context)
+    #return HttpResponse('Not Yet Implemented')
