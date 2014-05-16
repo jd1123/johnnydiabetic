@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Blog {% endblock %}
+
+{% block body_block %} 
+	
+	{% if posts %}
+		<div class="hero-unit">
+			<p>This is my blog. Here are the most recent posts:</p>
+			<ul>
+			{% for p in posts %}
+				<li><a href="{% url 'blog.views.viewblogpost' p.pk %}">{{p.title}}</a> created at {{p.created}} <br /></li>
+			{% endfor %}
+			</ul>
+		</div>
+	{% else %}
+		<div class="hero-unit">
+			Well, it seems like I haven't been very busy at this....
+		</div>
+	{% endif %}
+
+{% endblock %}

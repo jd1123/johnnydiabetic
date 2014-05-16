@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^login/$', views.user_login, name='login'),
     url(r'^login/next=(?P<next>\w+)$', views.user_login, name='login'),
     url(r'^logout/$', views.user_logout, name='logout'),
+    url(r'^blog/', include('blog.urls')),
     #url(r'^debug/$', views.debug, name = 'debug')
 )

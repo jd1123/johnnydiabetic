@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_block %}
+	<link href="{% static 'css/gallery.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} New Post {% endblock %}
+
+{% block body_block %}
+	<div class="hero-unit">
+		<form id="blogpost" method="post" action="/blog/post/">
+			{% csrf_token %}
+			Title: <br/>
+			<input type="text" class="inputStyle" name="title" placeholder="Title" /><br/>
+			Post: <br/>
+			<textarea name="body" class="inputStyle"> </textarea><br />
+			<input class="btn btn-primary" type="submit" value="Post" />
+		</form>
+	</div>
+{% endblock %}
