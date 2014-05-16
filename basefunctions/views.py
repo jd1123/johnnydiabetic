@@ -21,7 +21,7 @@ def about(request):
 # Login View
 def user_login(request):
     context = RequestContext(request)
-    
+    print next
     if request.method=="POST":
         username = request.POST['username']
         password = request.POST['password']

@@ -24,10 +24,14 @@ Forums
 			{% endfor %}
 			<tr><td></td><td></td></tr>
 		</table>
+		{% else %}
+		<div class="hero-unit">
+			There are no forums. How silly!
+		</div>
 		{% endif %}
 	{% else %}
 		<div class="hero-unit">
-			You are not logged in and therefore cannot see the forums
+			Please <a href="{% url 'basefunctions.views.user_login' %}">login</a>.
 		</div>
 	{% endif %}
 	
