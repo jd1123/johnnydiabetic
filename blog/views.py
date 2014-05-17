@@ -27,7 +27,7 @@ def blogpost(request):
         
         if form.is_valid():
             title = form.cleaned_data['title']
-            body = form.cleaned_data['body']
+            body = add_elements(form.cleaned_data['body'])
             BlogPost.objects.create(title=title, body=body)
             
             return HttpResponseRedirect(reverse('blog.views.index'))
@@ -42,4 +42,13 @@ def viewblogpost(request,pk):
     post = BlogPost.objects.get(pk=pk)
     context_dict['post'] = post
     return render_to_response('blog/viewblogpost.html', context_dict, context)
+
+def add_elements(post_string):
+    paragraph_list = post_string.split("\n\n")
+    
+    for i in range(len(paragraph_list)):
+        paragraph_list[i] = "<p>"+paragraph_list[i]+"<\p>"
+        
+    return "".join(paragraph_list)
+    
  

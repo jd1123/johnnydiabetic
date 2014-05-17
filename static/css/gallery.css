@@ -11,7 +11,9 @@
 	padding: 4px;
 }
 
-.inputStyle {
-	width = 200px;
-	padding: 4px;
+.submissionField {
+	width = 800px;
+	height = 390px;
+	border: 1px solid;
+	padding: 5px;
 }
