@@ -9,12 +9,16 @@
 
 {% block body_block %}
 	<div class="hero-unit">
+		{% if edit %}
+		<form id="blogpost" method="post" action="/blog/edit/{{pk}}/">
+		{% else %}
 		<form id="blogpost" method="post" action="/blog/post/">
+		{% endif %}
 			{% csrf_token %}
 			Title: <br/>
-			<input type="text" class="form-control sf" name="title" placeholder="Title"/><br/>
+			<input type="text" class="form-control sf" name="title" placeholder="Title" {% if body %}value="{{title}}"{%endif%}/><br/>
 			Post: <br/>
-			<textarea tabindex="2" class="input sf" rows="15" name="body"> </textarea><br />
+			<textarea tabindex="2" class="input sf" rows="15" name="body">{% if body %}{{ body }}{% endif %}</textarea><br />
 			<input class="btn btn-primary" type="submit" value="Post" />
 		</form>
 	</div>

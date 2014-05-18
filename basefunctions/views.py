@@ -21,29 +21,32 @@ def about(request):
 # Login View
 def user_login(request):
     context = RequestContext(request)
-    print next
+    
+    nxt = None
+    if request.GET.get('next'):
+        nxt = request.GET.get('next')
+        
     if request.method=="POST":
         username = request.POST['username']
         password = request.POST['password']
-        
-        # need to figure this out to send the user
-        # to the request path after logging in
-        #n_path = request.POST['n_path']
-        #print "next: " + str(n_path)
         
         user = authenticate(username=username, password=password)
         
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/')
+                if next:
+                    print nxt
+                    return HttpResponseRedirect(nxt)
+                else:
+                    return HttpResponseRedirect('/')
             else:
                 return HttpResponse("Your account is disabled.")
         else:
             print "Invalid login details {0}, {1}".format(username, password)
             return HttpResponse("Invalid login details.")
     else:
-        return render_to_response('login.html', {}, context)
+        return render_to_response('login.html', {'next': next}, context)
 
 # Logout View    
 @login_required
