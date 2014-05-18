@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block head_block %} 
+	<link href="{% static 'css/gallery.css' %}" rel="stylesheet">
+{%endblock%}
 {% block title %} {{post.title}} {%endblock%}
 
 {%block body_block %}
-	<div class="hero-unit">
-		{{post.title}} -- Created at {{post.created}} <br />
-		{{post.body}} 
-		<br/>
-		<br/>
+	<div class="container-narrow">
+		<div class="content">
 		
-		<a href="{% url 'blog.views.index' %}">Return to index</a>
-	</div>
-
+		<div class="page-header">
+			<h1><p>{{post.title}}</p>
+			<p><small>Created at {{post.created}}</small></p>
+			</h1> <br />
+		</div><!-- page-header -->
+		<div class="entry-content">
+			{{post.body | safe}} 
+			<br/>
+		</div><!-- entry-content -->
+		</div><!-- content -->
+	</div> <!-- container narrow -->
+	<a href="{% url 'blog.views.index' %}">Return to index</a>
 {% endblock %}

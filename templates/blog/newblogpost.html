@@ -12,9 +12,9 @@
 		<form id="blogpost" method="post" action="/blog/post/">
 			{% csrf_token %}
 			Title: <br/>
-			<input type="text" class="form-control submissionField" cols="99" name="title" placeholder="Title"/><br/>
+			<input type="text" class="form-control sf" name="title" placeholder="Title"/><br/>
 			Post: <br/>
-			<textarea tabindex="2" class="input" rows="15" cols="99" style="width:96%; font-size: 12pt;" name="body" class="inputStyle"> </textarea><br />
+			<textarea tabindex="2" class="input sf" rows="15" name="body"> </textarea><br />
 			<input class="btn btn-primary" type="submit" value="Post" />
 		</form>
 	</div>

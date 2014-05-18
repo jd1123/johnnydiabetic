@@ -11,9 +11,8 @@ def index(request):
     context = RequestContext(request)
     context_dict = {}
     
-    allposts = BlogPost.objects.all()
+    allposts = BlogPost.objects.all().order_by("-created")
     context_dict['posts'] = allposts
-    
     
     return render_to_response('blog/index.html', context_dict, context)
 
@@ -44,11 +43,15 @@ def viewblogpost(request,pk):
     return render_to_response('blog/viewblogpost.html', context_dict, context)
 
 def add_elements(post_string):
-    paragraph_list = post_string.split("\n\n")
+    paragraph_list = post_string.split("\r\n")
     
+    rmelements = []
     for i in range(len(paragraph_list)):
-        paragraph_list[i] = "<p>"+paragraph_list[i]+"<\p>"
+        if paragraph_list[i]!="":
+            paragraph_list[i] = "<p>"+paragraph_list[i]+"</p>"
+        else:
+            rmelements.append(i)
+    for index in rmelements:
+        del paragraph_list[index]
         
     return "".join(paragraph_list)
-    
- 

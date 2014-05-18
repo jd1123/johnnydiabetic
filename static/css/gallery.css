@@ -11,9 +11,16 @@
 	padding: 4px;
 }
 
-.submissionField {
-	width = 800px;
-	height = 390px;
-	border: 1px solid;
-	padding: 5px;
+.sf {
+	width: 90%;
+	resize: none;
+}
+
+.container-narrow {
+	margin: 0 auto;
+	max-width: 770px;
+}
+
+.container-narrow > hr {
+	margin: 30px 0;
 }
