@@ -6,7 +6,6 @@
 	<div class="hero-unit">
 		{% if user.is_authenticated %}
 			Welcome, {{ user.username }} <br>
-			Please take a look at the <a href="{% url 'forum.views.forumlist' %}"> forum</a>.
 		{% else %}
 			Hi everyone. Thanks for stopping by! <br>
 		{% endif %}
