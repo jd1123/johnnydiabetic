@@ -23,7 +23,13 @@
 	            {% else %}
 	            	<li><a href="{% url 'basefunctions.views.user_login' %}">Login</a></li>
 	            {% endif %}
-		    <li><a href="{% url 'blog.views.index' %}">Blog </a>            
+		    <li class="dropdown">
+		    	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Apps<b class="caret"></b></a>
+		    	<ul class="dropdown-menu">
+		    		<li><a href="{% url 'blog.views.index' %}">Blog </a></li>
+	           		<li><a href="{% url 'forum.views.forumlist' %}">Forum Index</a></li>
+			</ul>
+	    	    </li>		
 	            <li><a href="{% url 'forum.views.forumlist' %}">Forum Index</a></li>
 	            <li><a href="{% url 'basefunctions.views.about' %}">About</a></li>
 	            </ul>
@@ -51,7 +57,9 @@
 		</div>
 		<!-- /.fluid-container -->
 		
-		
+	
+    	<script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
+    	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	</body>
 	<footer>
 		<br /><br />
