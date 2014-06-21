@@ -4,3 +4,5 @@ settings.py
 .project
 .pydevproject
 *updates*.txt
+*.swp
+.ropeproject/

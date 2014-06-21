@@ -23,7 +23,7 @@
 	            {% else %}
 	            	<li><a href="{% url 'basefunctions.views.user_login' %}">Login</a></li>
 	            {% endif %}
-	            
+		    <li><a href="{% url 'blog.views.index' %}">Blog </a>            
 	            <li><a href="{% url 'forum.views.forumlist' %}">Forum Index</a></li>
 	            <li><a href="{% url 'basefunctions.views.about' %}">About</a></li>
 	            </ul>
@@ -37,7 +37,9 @@
 				<!-- /span -->
 				<div class="span1 bs-docs-sidebar">
 					<a href="https://github.com/jd1123"><img src="{% static 'img/johnnydiabetic.png' %}"></a><br />
-					<img src="{% static 'img/julia.png' %}">
+					<a href="https://github.com/jd1123">johnnydiabetic</a><br />
+					<center><img src="{% static 'img/julia.png' %}"></center>
+					<center>julia</center>
 				</div>
 				<div class="span10">				
 					{% block body_block %}

@@ -7,18 +7,14 @@
 		<a href="{% url 'basefunctions.views.user_logout' %}">Logout</a>
 		{% else %}
 		<h3>Login</h3>
-		{% if next %}
-		<form id="login_form" method="post" action="/login/?next={{next}}">
-		{% else %}
 		<form id="login_form" method="post" action="/login/">
-		{% endif %}
 			{% csrf_token %}
 			<input type="text" name="username" value="" size="50" placeholder="Username"/>
 			<br />
 			<input type="password" name="password" value="" size="50" placeholder="Password"/>
 			<br />
+			<input class="hidden" name="next" value = "{{ next }}" />
 			<input class="btn btn-primary" type="submit" value="Login" />
-			<input class="hidden" name="n_path" value = "{{ next }}" />
 		</form>
 		{%endif%}	
 	</div>
