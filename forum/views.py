@@ -13,14 +13,14 @@ from django.contrib.auth.decorators import login_required
 #    g = request.get_host()
 #    return HttpResponse(g)
 
-
+@login_required
 def forumlist(request):
     context = RequestContext(request)
     forums = Forum.objects.all()
     context_dict = {'forums': forums }
     return render_to_response('forum/forumlist.html', context_dict, context)
 
-@login_required   
+@login_required
 def threadlist(request, pk):
     context = RequestContext(request)
     context_dict = {}
@@ -33,7 +33,7 @@ def threadlist(request, pk):
         context_dict['forum_title'] = title
     except:
         return HttpResponse('ERROR: There are no threads in this forum')
-    
+
     return render_to_response('forum/threadlist.html', context_dict, context)
 
 @login_required
@@ -51,7 +51,7 @@ def postlist(request, pk):
         context_dict['pk'] = pk
     except:
         return HttpResponse('ERROR: There are no posts in this thread')
-    
+
     return render_to_response('forum/postlist.html', context_dict, context)
 
 @login_required
@@ -61,39 +61,39 @@ def new_post(request, pk):
     context_dict['action'] = 'new_thread'
     forum = Forum.objects.get(pk=pk)
     context_dict['forum_title'] = forum.title
-    
+
     if request.method == "POST":
         form = PostForm(request.POST)
-        
+
         if form.is_valid():
             subject = form.cleaned_data['subject']
             body = form.cleaned_data['body']
             thread = Thread.objects.create(forum=forum, title=subject, creator=request.user)
             Post.objects.create(thread=thread, subject=subject, body=body, creator=request.user)
-            
+
             #return HttpResponse('Your Thread has been created')
             return HttpResponseRedirect(reverse("forum.views.threadlist", args=[pk]))
         else:
             print form.errors
-            
+
     else:
         return render_to_response('forum/newpost.html', context_dict, context)
-        
+
 @login_required
 def reply(request, pk):
     context = RequestContext(request)
     context_dict = {'pk': pk}
-    
+
     if request.method=="POST":
         form = PostForm(request.POST)
-        
+
         if form.is_valid():
-            
+
             thread = Thread.objects.get(pk=pk)
             subject = form.cleaned_data['subject']
             body = form.cleaned_data['body']
             Post.objects.create(thread=thread, subject=subject, body = body, creator=request.user)
-            
+
             return HttpResponseRedirect(reverse("forum.views.postlist", args=[pk]))
         else:
             print form.errors
