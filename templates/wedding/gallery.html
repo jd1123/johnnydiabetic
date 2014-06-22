@@ -13,16 +13,27 @@
 
 {% block body_block %}
 	<div class="hero-unit">
-		<h2><center>Here are some of our wedding pictures.</center></h2>
+		<h2><small><center>Here are some of our wedding pictures.</center></small></h2>
 		<br />
 		{% if pics %}
-			<ul class="gallery">
+			<!-- <ul class="thumbnails">-->
+			<div class="row">
 			{% for p in pics %}
-				<li class="thumb"><a id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
+				<!-- <li class="thumb"><a id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
+				-->
+				<div class="col-xs-6 col-md-3">
+				<a class="thumbnail" style="height: 200px; width: 200px; display: block;" id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> 
+				</div>
 			{% endfor %}
-			</ul>
+			</div>
+			<!-- </ul> -->
 		{% endif %}
-				
+		<div>
+			Page: 
+			{% for p in page_list %}
+				<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}
 
@@ -30,19 +41,13 @@
 <script type="text/javascript" src="{% static 'js/jquery.fancybox.pack.js' %}"></script>
 	<script>
 		$(document).ready(function() {
-
 					/* This is basic - uses default settings */
-					
 					$("a#single_image").fancybox();
-						
 						/* Using custom settings */
-						
 						$("a#inline").fancybox({
 									'hideOnContentClick': true
 										});
-
 							/* Apply fancybox to multiple items */
-							
 							$("a.group").fancybox({
 										'transitionIn'	:	'elastic',
 												'transitionOut'	:	'elastic',

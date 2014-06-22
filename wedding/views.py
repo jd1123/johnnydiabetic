@@ -14,12 +14,17 @@ def root(request):
 
 
 @login_required
-def gallery(request):
+def gallery(request, page_num=1):
     context = RequestContext(request)
     context_dict = {}
     wedding_pictures = WeddingPic.objects.all()
     p = Paginator(wedding_pictures, 16)
-    context_dict['pics'] = wedding_pictures
+    context_dict['pics'] = p.page(page_num).object_list
+    page_list = []
+    for i in range(p.num_pages):
+        page_list.append(i+1)
+    context_dict['page_list'] = page_list
+
     return render_to_response('wedding/gallery.html', context_dict, context)
 
 

@@ -1,6 +1,6 @@
-from django.core.management import setup_environ
-import settings
-setup_environ(settings)
+# from django.core.management import setup_environ
+# import settings
+# setup_environ(settings)
 
 from os import listdir
 from os.path import isfile, join
