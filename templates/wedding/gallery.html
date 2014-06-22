@@ -13,8 +13,15 @@
 
 {% block body_block %}
 	<div class="hero-unit">
-		<h2><small><center>Here are some of our wedding pictures.</center></small></h2>
+		<h2><small><center>Here are some of our wedding pictures. <br /><br />Page {{curr_page}}</center></small></h2>
 		<br />
+		
+		Page: 
+		{% for p in page_list %}
+			<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+		{% endfor %}
+
+		<br /><br />
 		{% if pics %}
 			<ul class="thumbnails">
 			{% for p in pics %}
