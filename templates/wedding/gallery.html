@@ -12,14 +12,19 @@
 
 {% block body_block %}
 	<div class="hero-unit">
-		<center>Here are some of our wedding pictures.</center>
+		<h2><center>Here are some of our wedding pictures.</center></h2>
+		<br />
 		{% if pics %}
 			<ul class="gallery">
 			{% for p in pics %}
-				<li><a href="{% url 'wedding.views.pic' p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
+				<li class="thumb"><a href="{% url 'wedding.views.pic' p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
 			{% endfor %}
 			</ul>
 		{% endif %}
 				
 	</div>
+{% endblock %}
+
+{% block scriptblock %}
+	<script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 {% endblock %}

@@ -9,6 +9,9 @@
 	float: left;
 	width: 25%;
 	padding: 4px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .sf {
@@ -24,3 +27,9 @@
 .container-narrow > hr {
 	margin: 30px 0;
 }
+
+.thumb {
+	width: 200px;
+	height: 205px;
+}
+
