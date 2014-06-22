@@ -16,17 +16,12 @@
 		<h2><small><center>Here are some of our wedding pictures.</center></small></h2>
 		<br />
 		{% if pics %}
-			<!-- <ul class="thumbnails">-->
-			<div class="row">
+			<ul class="thumbnails">
 			{% for p in pics %}
-				<!-- <li class="thumb"><a id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
-				-->
-				<div class="col-xs-6 col-md-3">
-				<a class="thumbnail" style="height: 200px; width: 200px; display: block;" id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> 
-				</div>
+				<li class="thumb"><a id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
+				<!--<a class="thumbnail" style="height: 200px; width: 200px; display: block;" id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> -->
 			{% endfor %}
-			</div>
-			<!-- </ul> -->
+			</ul>
 		{% endif %}
 		<div>
 			Page: 
