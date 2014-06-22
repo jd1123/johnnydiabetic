@@ -4,6 +4,7 @@
 
 {% block head_block %}
 	<link href="{% static 'css/gallery.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/jquery.fancybox.css' %}" type="text/css" media="screen" />
 {% endblock %}
 
 {% block title %}
@@ -17,7 +18,7 @@
 		{% if pics %}
 			<ul class="gallery">
 			{% for p in pics %}
-				<li class="thumb"><a href="{% url 'wedding.views.pic' p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
+				<li class="thumb"><a id="single_image" href="{% url 'wedding.views.pic' p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
 			{% endfor %}
 			</ul>
 		{% endif %}
@@ -26,5 +27,30 @@
 {% endblock %}
 
 {% block scriptblock %}
-	<script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.fancybox.pack.js' %}"></script>
+	<script>
+		$(document).ready(function() {
+
+					/* This is basic - uses default settings */
+					
+					$("a#single_image").fancybox();
+						
+						/* Using custom settings */
+						
+						$("a#inline").fancybox({
+									'hideOnContentClick': true
+										});
+
+							/* Apply fancybox to multiple items */
+							
+							$("a.group").fancybox({
+										'transitionIn'	:	'elastic',
+												'transitionOut'	:	'elastic',
+														'speedIn'		:	600, 
+																'speedOut'		:	200, 
+																		'overlayShow'	:	false
+																			});
+								
+		});
+	</script>
 {% endblock %}
