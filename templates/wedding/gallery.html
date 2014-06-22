@@ -18,7 +18,7 @@
 		{% if pics %}
 			<ul class="gallery">
 			{% for p in pics %}
-				<li class="thumb"><a id="single_image" href="{% url 'wedding.views.pic' p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
+				<li class="thumb"><a id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
 			{% endfor %}
 			</ul>
 		{% endif %}

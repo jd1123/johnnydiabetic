@@ -6,6 +6,14 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
+def file_url(context, filename=None):
+    if filename:
+        return os.path.join(SECURE_FILE_URL, filename)
+    else:
+        return "#"
+
+
+@register.simple_tag(takes_context=True)
 def secure_file(context, filename=None, alt_text=None, class_string=None):
 
     html_string = ''
