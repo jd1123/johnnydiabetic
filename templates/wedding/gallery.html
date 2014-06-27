@@ -18,7 +18,11 @@
 		
 		Page: 
 		{% for p in page_list %}
-			<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+			{% if p = curr_page %}
+				<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+			{% else %}
+				{{ p }}
+			{% endif %}
 		{% endfor %}
 
 		<br /><br />
@@ -33,7 +37,11 @@
 		<div>
 			Page: 
 			{% for p in page_list %}
-				<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+				{% if p = curr_page %}
+					<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+				{% else %}
+					{{ p }}
+				{% endif %}
 			{% endfor %}
 		</div>
 	</div>

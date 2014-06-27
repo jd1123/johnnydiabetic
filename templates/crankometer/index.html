@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_block %} 
+
+{% endblock %}
+
+{% block title %} 
+	Crank-O-Meter!
+{% endblock %}
+
+{% block body_block %}
+	<div class="hero-unit">
+		<h1>Welcome to the Crank-O-Meter.</h1>
+		<h2><small>It's one and only purpose: to see how often johnnydiabetic is cranky in the morning</small></h2>
+		<a href="{% url 'crankometer.views.vote' %}">Click here to vote</a>
+	</div>
+
+{% endblock %}
