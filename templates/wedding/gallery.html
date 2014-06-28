@@ -13,12 +13,16 @@
 
 {% block body_block %}
 	<div class="hero-unit">
-		<h2><small><center>Here are some of our wedding pictures. <br /><br />Page {{curr_page}}</center></small></h2>
+		<h2><small><center>Here are some of our wedding pictures. <br /><br /></center></h2>
 		<br />
 		
 		Page: 
 		{% for p in page_list %}
-			<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+			{% if p = curr_page %}
+				{{p}} &nbsp
+			{% else %}
+				<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+			{% endif %}
 		{% endfor %}
 
 		<br /><br />
@@ -33,7 +37,11 @@
 		<div>
 			Page: 
 			{% for p in page_list %}
-				<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+				{% if p = curr_page %}
+					{{p}} &nbsp
+				{% else %}
+					<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+				{% endif %}
 			{% endfor %}
 		</div>
 	</div>
