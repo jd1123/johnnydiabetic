@@ -25,7 +25,6 @@ def gallery(request, page_num=1):
         page_list.append(i+1)
     context_dict['page_list'] = page_list
     context_dict['curr_page'] = int(page_num)
-    print page_num
 
     return render_to_response('wedding/gallery.html', context_dict, context)
 
