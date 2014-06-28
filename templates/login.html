@@ -2,14 +2,13 @@
 {% block title %}Login{% endblock %}
 {% block body_block %}
 	<div class="jumbotron">
+	<div class="container">
 		{% if user.is_authenticated %}
 		Welcome back {{ user }}!<br />
 		<a href="{% url 'basefunctions.views.user_logout' %}">Logout</a>
 		{% else %}
 		<div class="row">
-			<div class="col-md-4">
-			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<h3>Login</h3>
 			<form id="login_form" method="post" action="/login/">
 				{% csrf_token %}
@@ -20,12 +19,10 @@
 				<input class="hidden" name="next" value = "{{ next }}" />
 				<input class="btn btn-primary" type="submit" value="Login" />
 			</form>
+		</div>
 		{%endif%}	
-			</div>
-			<div class="col-md-4">
-			</div>
+		</div>
 	</div>
-	
 	</div>
 	
 {% endblock %}

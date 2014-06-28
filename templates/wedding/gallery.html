@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load custom_tags %}
-
 {% block head_block %}
 	<link href="{% static 'css/gallery.css' %}" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'css/jquery.fancybox.css' %}" type="text/css" media="screen" />
@@ -30,7 +29,7 @@
 			<ul class="thumbnails">
 			{% for p in pics %}
 			<div class="col-xs-6 col-md-3">
-				<a class="thumbnail" style="height: 200px; width: 200px; display: block;" id="single_image" href="{% file_url p.pic_name %}">
+				<a class="thumbnail" style="height: 200px; width: 220px; display: block;" id="single_image" href="{% file_url p.pic_name %}">
 					{% secure_tn p.pic_name %}
 				</a>
 			</div>

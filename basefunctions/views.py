@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 #from basefunctions.forms import UserForm, UserProfileForm
+from blog.models import BlogPost
 import os
 
 SECURE_ROOT = '/protected/'
@@ -12,7 +13,15 @@ SECURE_ROOT = '/protected/'
 # Create your views here.
 def root(request):
     context = RequestContext(request)
-    return render_to_response('index.html', context)
+    try:
+        latest = BlogPost.objects.all().order_by('-id')[0]
+        context_dict = {'latest' : True,
+                        'title' : latest.title,
+                        'pk' : latest.pk}
+    except IndexError:
+        context_dict = {}
+
+    return render_to_response('index.html', context_dict, context)
 
 
 def about(request):

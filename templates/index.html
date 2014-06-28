@@ -4,21 +4,25 @@
 {% block body_block %}
 		
 	<div class="jumbotron">
-		{% if user.is_authenticated %}
-			Welcome, {{ user.username }} <br>
-		{% else %}
-			Hi everyone. Thanks for stopping by! <br>
-		{% endif %}
-		<br />
-		This is my website. It is a work in progress. I am trying to accomplish a few things.
-		First, I am trying to learn <a href='http://www.djangoproject.com'>Django</a>. Second,
-		having recently been married, I am trying to get a way to distribute the pictures on the web
-		so that only authenticated users can see them. Sure, there are easier ways to do this,
-		but this seems like the perfect opportunity to learn something new. <br /><br />
-		I have learned a lot so far, and have taken this opportunity to delve further into my
-		favorite programming language, <a href='http://www.python.org'>Python</a>.
-		Please check out the <a href="{% url 'basefunctions.views.about' %}">About</a> section
-		to learn a little bit about me.
+		<div class="container">
+			{% if user.is_authenticated %}
+				<h2>Welcome, {{ user.username }}</h2> <br>
+			{% else %}
+				<h2>Hi everyone. Thanks for stopping by!</h2> <br>
+			{% endif %}
+			<br />
+			<p>
+			This is my website. It is a work in progress. I am trying to accomplish a few things.
+			First, I am trying to learn <a href='http://www.djangoproject.com'>Django</a>. Second,
+			having recently been married, I am trying to get a way to distribute the pictures on the web
+			so that only authenticated users can see them. Sure, there are easier ways to do this,
+			but this seems like the perfect opportunity to learn something new. <br /><br />
+			I have learned a lot so far, and have taken this opportunity to delve further into my
+			favorite programming language, <a href='http://www.python.org'>Python</a>.
+			Please check out the <a href="{% url 'basefunctions.views.about' %}">About</a> section
+			to learn a little bit about me.
+			</p>
+		</div>
 	</div>
 
 

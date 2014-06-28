@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-
 {% block title %}About{% endblock %}
-
 {% block body_block %}
 <div class="jumbotron">
-	<h2>About me!</h2><br />
+	<div class="container">
+		<h2>About me!</h2><br />
+		<p>
 		I am johnnydiabetic, and I built this website with
         <a href="http://www.djangoproject.com">Django</a> as a <a href="https://github.com/jd1123/johnnydiabetic">small project</a>.
         It is a work in progress.
@@ -22,15 +22,16 @@
         We recently moved back to the New York area and are building a life together in Connecticut. It certainly is nice here,
         but sometimes we really miss Texas.
         <br /><br />
-	This website has a bunch of silly little things that I decided I wanted to write. The apps (available at the top via the
-	navbar) include <a href="{% url 'blog.views.index' %}">my blog</a>, <a href="{% url 'forum.views.forumlist' %}">a forum</a>
-	and <a href="{% url 'wedding.views.gallery' %}">my wedding pictures</a>. None of these are completed, mostly because I am
-	having a hard time focusing with work and life. But I am having fun making small improvements each day and hopefully I
-	will learn a bunch in the process.
-	<br /><br />
+		This website has a bunch of silly little things that I decided I wanted to write. The apps (available at the top via the
+		navbar) include <a href="{% url 'blog.views.index' %}">my blog</a>, <a href="{% url 'forum.views.forumlist' %}">a forum</a>
+		and <a href="{% url 'wedding.views.gallery' %}">my wedding pictures</a>. None of these are completed, mostly because I am
+		having a hard time focusing with work and life. But I am having fun making small improvements each day and hopefully I
+		will learn a bunch in the process.
+		<br /><br />
         If you have anything to say I'm happy to hear from you, so please feel free to
         <a href="mailto:johnnydiabetic@gmail.com">email</a> me.
-	
+		</p>
+	</div>	
 </div>
 
 
