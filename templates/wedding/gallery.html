@@ -15,29 +15,32 @@
 	<div class="hero-unit">
 		<h2><small><center>Here are some of our wedding pictures. <br /><br /></center></h2>
 		<br />
-		
 		Page: 
-		{% for p in page_list %}
-			{% if p = curr_page %}
-				{{p}} &nbsp
+		{% for pg in page_list %}
+			{% if pg == curr_page %}
+				{{pg}}&nbsp
 			{% else %}
-				<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
+				<a href="{% url 'wedding.views.gallery' pg %}">{{ pg }}</a> &nbsp
 			{% endif %}
 		{% endfor %}
 
 		<br /><br />
 		{% if pics %}
+			<div class="row">
 			<ul class="thumbnails">
 			{% for p in pics %}
-				<li class="thumb"><a id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> </li>
-				<!--<a class="thumbnail" style="height: 200px; width: 200px; display: block;" id="single_image" href="{% file_url p.pic_name %}">{% secure_tn p.pic_name %}</a> -->
+			<div class="col-xs-6 col-md-3">
+				<a class="thumbnail" style="height: 200px; width: 200px; display: block;" id="single_image" href="{% file_url p.pic_name %}">
+					{% secure_tn p.pic_name %}
+				</a>
+			</div>
 			{% endfor %}
-			</ul>
+			</ul></div>
 		{% endif %}
 		<div>
 			Page: 
 			{% for p in page_list %}
-				{% if p = curr_page %}
+				{% if p == curr_page %}
 					{{p}} &nbsp
 				{% else %}
 					<a href="{% url 'wedding.views.gallery' p %}">{{ p }}</a> &nbsp
