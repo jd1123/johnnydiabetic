@@ -16,10 +16,11 @@
 			{% endif %}
 		</div><!-- page-header -->
 		<div class="entry-content">
-			{{post.body | safe}} 
+			{{body | safe}} 
 			<br/>
+
+			<a href="{% url 'blog.views.index' %}">Return to index</a>
 		</div><!-- entry-content -->
 		</div><!-- content -->
 	</div> <!-- container narrow -->
-	<a href="{% url 'blog.views.index' %}">Return to index</a>
 {% endblock %}

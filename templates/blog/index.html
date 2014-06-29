@@ -3,21 +3,30 @@
 
 {% block title %} Blog {% endblock %}
 
+{% block head_block %} 
+	<link href="{% static 'css/gallery.css' %}" rel="stylesheet">
+{%endblock%}
+
 {% block body_block %} 
-	
+	<div class="container-narrow">
 	{% if posts %}
-		<div class="hero-unit">
-			<p>This is my blog. Here are the most recent posts:</p>
+		<div class="page-header">
+			<h2>This is my blog. <br />Here are the most recent posts:</h2>
+		</div>
 			<ul>
 			{% for p in posts %}
-				<li><a href="{% url 'blog.views.viewblogpost' p.pk %}">{{p.title}}</a> created at {{p.created}} <br /></li>
+			<div class="row">
+				<h4><a href="{% url 'blog.views.viewblogpost' p.pk %}">{{ p.title }}</a>
+				<br />
+				<small>created at {{p.object.created}}</small>
+				</h4> <br />
+				{{ p.slug }}
+			</div>
+			<br />
 			{% endfor %}
 			</ul>
-		</div>
 	{% else %}
-		<div class="hero-unit">
 			Well, it seems like I haven't been very busy at this....
-		</div>
 	{% endif %}
-
+	</div>
 {% endblock %}

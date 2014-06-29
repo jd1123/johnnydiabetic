@@ -5,6 +5,7 @@ from blog.models import BlogPost
 from blog.forms import BlogPostForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 import re
 # Create your views here.
 
@@ -14,8 +15,24 @@ def index(request):
     context_dict = {}
 
     allposts = BlogPost.objects.all().order_by("-created")
-    context_dict['posts'] = allposts
+    p = Paginator(allposts, 5)
+    recent_posts = p.page(1).object_list
+    posts = []
 
+    for i in recent_posts:
+        words = i.body.split(' ')
+        if len(words) < 30:
+            l=len(words)
+        else:
+            l = 30
+
+        slug = ' '.join([x for x in words[0:l]]) + "..."
+        posts.append({'title': i.title,
+                    'slug': slug,
+                    'pk': i.pk,
+                    'object':i})
+
+    context_dict['posts'] = posts
     return render_to_response('blog/index.html', context_dict, context)
 
 
@@ -32,12 +49,12 @@ def blogpost(request, pk=None):
             if pk!=None:
                 p = BlogPost.objects.get(pk=pk)
                 p.title = form.cleaned_data['title']
-                p.body = add_elements(form.cleaned_data['body'])
+                p.body = form.cleaned_data['body']
                 p.save()
 
             else:
                 title = form.cleaned_data['title']
-                body = add_elements(form.cleaned_data['body'])
+                body = form.cleaned_data['body']
                 BlogPost.objects.create(title=title, body=body, creator=request.user)
 
             return HttpResponseRedirect(reverse('blog.views.index'))
@@ -59,6 +76,7 @@ def viewblogpost(request,pk):
     context_dict = {}
     post = BlogPost.objects.get(pk=pk)
     context_dict['post'] = post
+    context_dict['body'] = add_elements(post.body)
     context_dict['pk'] = pk
     return render_to_response('blog/viewblogpost.html', context_dict, context)
 
