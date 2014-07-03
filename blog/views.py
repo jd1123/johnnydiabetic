@@ -10,19 +10,22 @@ import re
 # Create your views here.
 
 
-def index(request):
+def index(request, pg=1):
     context = RequestContext(request)
     context_dict = {}
 
     allposts = BlogPost.objects.all().order_by("-created")
     p = Paginator(allposts, 5)
-    recent_posts = p.page(1).object_list
+    try:
+        recent_posts = p.page(pg).object_list
+    except:  # no page exception - dont know what it is
+        recent_posts = p.page(1).object_list
     posts = []
 
     for i in recent_posts:
         words = i.body.split(' ')
         if len(words) < 30:
-            l=len(words)
+            l = len(words)
         else:
             l = 30
 
@@ -33,6 +36,7 @@ def index(request):
                     'object':i})
 
     context_dict['posts'] = posts
+    context_dict['curr_page'] = int(pg)
     return render_to_response('blog/index.html', context_dict, context)
 
 
@@ -41,12 +45,12 @@ def blogpost(request, pk=None):
     context = RequestContext(request)
     context_dict = {}
 
-    if request.method=="POST":
+    if request.method == "POST":
         form = BlogPostForm(request.POST)
 
         if form.is_valid():
 
-            if pk!=None:
+            if pk is not None:
                 p = BlogPost.objects.get(pk=pk)
                 p.title = form.cleaned_data['title']
                 p.body = form.cleaned_data['body']
@@ -61,7 +65,7 @@ def blogpost(request, pk=None):
         else:
             return HttpResponse(form.errors)
     else:
-        if pk!=None:
+        if pk is not None:
             p = BlogPost.objects.get(pk=pk)
             context_dict['edit'] = True
             context_dict['pk'] = pk
@@ -71,7 +75,8 @@ def blogpost(request, pk=None):
 
         return render_to_response('blog/newblogpost.html', context_dict, context)
 
-def viewblogpost(request,pk):
+
+def viewblogpost(request, pk):
     context = RequestContext(request)
     context_dict = {}
     post = BlogPost.objects.get(pk=pk)
@@ -80,12 +85,13 @@ def viewblogpost(request,pk):
     context_dict['pk'] = pk
     return render_to_response('blog/viewblogpost.html', context_dict, context)
 
+
 def add_elements(post_string):
     paragraph_list = post_string.split("\r\n\r\n")
 
     rmelements = []
     for i in range(len(paragraph_list)):
-        if paragraph_list[i]!="":
+        if paragraph_list[i] != "":
             paragraph_list[i] = "<p>"+paragraph_list[i]+"</p>"
         else:
             rmelements.append(i)
@@ -94,6 +100,6 @@ def add_elements(post_string):
 
     return "".join(paragraph_list)
 
-def strip_paragraph_elements(post_string):
-    return re.sub(r"<.?p[^>]*>", "\r\n\r\n",post_string)
 
+def strip_paragraph_elements(post_string):
+    return re.sub(r"<.?p[^>]*>", "\r\n\r\n", post_string)
