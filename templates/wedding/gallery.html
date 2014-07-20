@@ -17,7 +17,7 @@
 		Page: 
 		{% for pg in page_list %}
 			{% if pg == curr_page %}
-				{{pg}}&nbsp
+				{{pg}} &nbsp
 			{% else %}
 				<a href="{% url 'wedding.views.gallery' pg %}">{{ pg }}</a> &nbsp
 			{% endif %}

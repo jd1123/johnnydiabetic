@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'myforum.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    
+
     url(r'^admin/', include(admin.site.urls)),
     url(r'^forum/',include('forum.urls')),
     url(r'^wedding/',include('wedding.urls')),
@@ -19,5 +19,6 @@ urlpatterns = patterns('',
     url(r'^login/next=(?P<next>\w+)$', views.user_login, name='login'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^blog/', include('blog.urls')),
+    url(r'^bloodsugar/', include('bloodsugar.urls')),
     #url(r'^debug/$', views.debug, name = 'debug')
 )
