@@ -6,7 +6,7 @@
 <div class="container">
 	<h3>This is the blood sugar app.</h3>
 	<br />
-	Last reading: {{ last_reading }} <br />
+	Last reading: {{ last_reading }} at {{tm}} <br />
 	14 Reading Avg: {{ avg_14 }} <br />
 	30 Reading Avg: {{ avg_30 }} <br />
 
@@ -16,8 +16,7 @@
 	{% if user.is_authenticated %}
 		<form id="bloodsugarentry" method="post" action="/bloodsugar/">
 			{% csrf_token %}
-			Reading: <br/>
-			<input type="number" class="form-control sf" name="reading" placeholder="Reading" value="reading" /><br/>
+			<input type="number" class="input-large" name="reading" placeholder="Reading" value="reading" />
 			<input class="btn btn-primary" type="submit" value="Post" />
 		</form>
 	{% endif %}
