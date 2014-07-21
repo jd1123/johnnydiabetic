@@ -28,7 +28,11 @@ def about(request):
     context = RequestContext(request)
     return render_to_response('about.html', context)
 
-
+def robots(request):
+    context=RequestContext(request)
+    with open('/opt/johnnydiabetic/johnnydiabetic/static/robots.txt') as f:
+        s = f.read()
+    return HttpResponse(s, content_type='text/plain')
 # Login View
 # this definitely is insecure
 # finally got the next thing working

@@ -20,5 +20,6 @@ urlpatterns = patterns('',
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^blog/', include('blog.urls')),
     url(r'^bloodsugar/', include('bloodsugar.urls')),
+    url(r'^robots.txt$', views.robots, name="robots"),
     #url(r'^debug/$', views.debug, name = 'debug')
 )
