@@ -18,6 +18,12 @@ My Blog
 I've never kept a blog before, and maybe I will in the future. But it seems like a good way to learn web programming. Right now,
 it has one post and the interface is not great, but I plan to work on this little by little.
 
+Blood Sugar Monitor
+----
+I have type-1 diabetes. I keep take my blood sugars many times per day. My doctor would like to see them, but I am lazy and do not know how to get the many machines
+I have to play nicely with my computer. So I will enter them into my website and give my doctor access. Just started this, needs some work but it is
+fairly simple.
+
 TODO
 ----
 * Improve the blog interface
