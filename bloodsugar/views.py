@@ -83,7 +83,7 @@ def data(request):
     return HttpResponse(resp, content_type="text/csv")
 
 def sugar_chart(x_axis, y_axis):
-    plot_date(x_axis,y_axis)
+    plot_date(x_axis,y_axis, linestyle='--')
 
     xlabel('entry time')
     ylabel('blood sugar')

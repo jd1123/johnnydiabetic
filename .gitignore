@@ -6,3 +6,4 @@ settings.py
 *updates*.txt
 *.swp
 .ropeproject/
+static/bschart.png
