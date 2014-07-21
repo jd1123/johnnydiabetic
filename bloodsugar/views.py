@@ -13,18 +13,20 @@ import os
 # Create your views here.
 
 
-@login_required
 def root(request):
     context = RequestContext(request)
     # POST Request
     if request.method == 'POST':
-        form = BloodSugarEntryForm(request.POST)
-        if form.is_valid():
-            reading = int(form.cleaned_data['reading'])
-            BloodSugarEntry.objects.create(reading=reading)
-            return HttpResponseRedirect(reverse('bloodsugar.views.root'))
+        if request.user.is_authenticated():
+            form = BloodSugarEntryForm(request.POST)
+            if form.is_valid():
+                reading = int(form.cleaned_data['reading'])
+                BloodSugarEntry.objects.create(reading=reading)
+                return HttpResponseRedirect(reverse('bloodsugar.views.root'))
+            else:
+                return HttpResponse(form.errors)
         else:
-            return HttpResponse(form.errors)
+            return HttpResponse("ERROR: You cannot POST")
 
     # GET request
     else:
