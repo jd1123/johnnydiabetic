@@ -17,6 +17,8 @@ def root(request):
     context = RequestContext(request)
     # POST Request
     if request.method == 'POST':
+        # you cannot post unless you are authenticated
+        # right now, any user can post, this is bad
         if request.user.is_authenticated():
             form = BloodSugarEntryForm(request.POST)
             if form.is_valid():
@@ -25,6 +27,7 @@ def root(request):
                 return HttpResponseRedirect(reverse('bloodsugar.views.root'))
             else:
                 return HttpResponse(form.errors)
+        # tell em...
         else:
             return HttpResponse("ERROR: You cannot POST")
 
@@ -45,21 +48,24 @@ def root(request):
             else:
                 avg_30 = sum([x.reading for x in all_entries[0:29]])/30
 
+            x_axis = [x.entry_time for x in all_entries]
+            y_axis = [x.reading for x in all_entries]
+
         except ObjectDoesNotExist:
             all_entries = []
             last_reading = 0
             avg_14 = 0
             avg_30 = 0
+            x_axis = []
+            y_axis = []
 
         # Create chart
-        x_axis = [x.entry_time for x in all_entries]
-        y_axis = [x.reading for x in all_entries]
         sugar_chart(x_axis, y_axis)
         context_dict = {'last_reading': last_reading, 'tm': tm, 'avg_14': avg_14, 'avg_30': avg_30}
 
         return render_to_response('bloodsugar/index.html', context_dict, context)
 
-
+# Send all sugars in csv text format
 @login_required
 def data(request):
     context = RequestContext(request)
@@ -74,7 +80,7 @@ def data(request):
         output.append(str(v.entry_time) + ","+ str(v.reading) + ",\n")
     resp = ''.join(output)
 
-    return HttpResponse(resp, content_type="text/plain")
+    return HttpResponse(resp, content_type="text/csv")
 
 def sugar_chart(x_axis, y_axis):
     plot_date(x_axis,y_axis)

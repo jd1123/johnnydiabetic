@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 #from basefunctions.forms import UserForm, UserProfileForm
 from blog.models import BlogPost
 import os
+from johnnydiabetic.settings import STATIC_PATH
 
 SECURE_ROOT = '/protected/'
 
@@ -30,9 +31,11 @@ def about(request):
 
 def robots(request):
     context=RequestContext(request)
-    with open('/opt/johnnydiabetic/johnnydiabetic/static/robots.txt') as f:
+    with open(os.path.join(STATIC_PATH, 'robots.txt')) as f:
         s = f.read()
     return HttpResponse(s, content_type='text/plain')
+
+
 # Login View
 # this definitely is insecure
 # finally got the next thing working
