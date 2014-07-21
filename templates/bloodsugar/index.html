@@ -3,5 +3,25 @@
 {% block title %}Blood Sugar Monitor {% endblock %}
 
 {% block body_block %}
+<div class="container">
+	<h3>This is the blood sugar app.</h3>
+	<br />
+	Last reading: {{ last_reading }} <br />
+	14 Reading Avg: {{ avg_14 }} <br />
+	30 Reading Avg: {{ avg_30 }} <br />
+
+	<br><br>
+	<div class="container">
+
+	{% if user.is_authenticated %}
+		<form id="bloodsugarentry" method="post" action="/bloodsugar/">
+			{% csrf_token %}
+			Reading: <br/>
+			<input type="number" class="form-control sf" name="reading" placeholder="Reading" value="reading" /><br/>
+			<input class="btn btn-primary" type="submit" value="Post" />
+		</form>
+	{% endif %}
+	</div>
+</div>
 
 {% endblock %}
