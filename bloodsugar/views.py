@@ -63,7 +63,18 @@ def root(request):
 @login_required
 def data(request):
     context = RequestContext(request)
-    return HttpResponse("Not yet implemented")
+    try:
+        entries = BloodSugarEntry.objects.all()
+    except ObjectDoesNotExist:
+        entries = []
+
+    output = []
+    output.append("entry_time, reading, \n")
+    for v in entries:
+        output.append(str(v.entry_time) + ","+ str(v.reading) + ",\n")
+    resp = ''.join(output)
+
+    return HttpResponse(resp, content_type="text/plain")
 
 def sugar_chart(x_axis, y_axis):
     plot_date(x_axis,y_axis)
