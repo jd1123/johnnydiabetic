@@ -22,9 +22,13 @@
 	</div>
 
 	<h3><small>Lastest Stats:</small></h3>
-	Last reading: <b>{{ last_reading }}</b> taken at {{ tm }}  <br />
-	14 Reading Avg: {{ avg_14 }} <br />
-	30 Reading Avg: {{ avg_30 }} <br />
+	Last reading: <b>{{ last_reading }}</b> taken at {{ tm }}  <br /><br />
+	14 Reading Avg: <b>{{ avg_14 }}</b> Stdev: <b>{{ stdev_14 }}</b><br />
+	30 Reading Avg: <b>{{ avg_30 }}</b> Stdev: <b>{{stdev_30}}</b><br />
+	High Reading: {{high}}<br />
+	Low Reading: {{low}}<br />
+	Total Readings: {{N}}<br />
+
 
 	<div class="container">	
 		<img src="{% static 'bschart.png' %}">

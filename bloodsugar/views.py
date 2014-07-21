@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from pylab import *
 from johnnydiabetic.settings import STATIC_PATH
 import os
+from numpy import std
 # Create your views here.
 
 
@@ -39,17 +40,29 @@ def root(request):
             tm = all_entries[0].entry_time
             total_entries = len(all_entries)
             if total_entries < 14:
-                avg_14 = sum([x.reading for x in all_entries])/total_entries
+                rd = [x.reading for x in all_entries]
+                avg_14 = sum(rd)/total_entries
+                stdev_14 = int(std(rd))
             else:
-                avg_14 = sum([x.reading for x in all_entries[0:13]])/14
+                rd = [x.reading for x in all_entries[0:13]]
+                avg_14 = sum(rd)/14
+                stdev_14 = int(std(rd))
 
             if total_entries < 30:
-                avg_30 = sum([x.reading for x in all_entries])/total_entries
+                rd = [x.reading for x in all_entries]
+                avg_30 = sum(rd)/total_entries
+                stdev_30 = int(std(rd))
             else:
-                avg_30 = sum([x.reading for x in all_entries[0:29]])/30
+                rd = [x.reading for x in all_entries[0:29]]
+                avg_30 = sum()/30
+                stdev_30 = int(std(rd))
 
             x_axis = [x.entry_time for x in all_entries]
             y_axis = [x.reading for x in all_entries]
+            high = max(y_axis)
+            low = min(y_axis)
+            N = total_entries
+
 
         except ObjectDoesNotExist:
             all_entries = []
@@ -58,10 +71,16 @@ def root(request):
             avg_30 = 0
             x_axis = []
             y_axis = []
+            high = 0
+            low = 0
+            N = 0
 
         # Create chart
         sugar_chart(x_axis, y_axis)
-        context_dict = {'last_reading': last_reading, 'tm': tm, 'avg_14': avg_14, 'avg_30': avg_30}
+        context_dict = {'last_reading': last_reading,
+                        'tm': tm, 'avg_14': avg_14, 'stdev_14': stdev_14,
+                        'avg_30': avg_30, 'stdev_30': stdev_30,
+                        'high':high, 'low':low, 'N':N}
 
         return render_to_response('bloodsugar/index.html', context_dict, context)
 
