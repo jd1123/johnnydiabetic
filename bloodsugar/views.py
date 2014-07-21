@@ -42,6 +42,6 @@ def root(request):
         return render_to_response('bloodsugar/index.html', context_dict, context)
 
 @login_required
-def entry(request):
+def data(request):
     context = RequestContext(request)
     return HttpResponse("Not yet implemented")
