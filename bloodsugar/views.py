@@ -62,7 +62,8 @@ def root(request):
             high = max(y_axis)
             low = min(y_axis)
             N = total_entries
-
+            count_high = sum([1 for x in all_entries if x > 140])
+            count_low = sum([1 for x in all_entries if x < 70])
 
         except ObjectDoesNotExist:
             all_entries = []
@@ -74,13 +75,16 @@ def root(request):
             high = 0
             low = 0
             N = 0
+            count_high = 0
+            count_low = 0
 
         # Create chart
         sugar_chart(x_axis, y_axis)
         context_dict = {'last_reading': last_reading,
                         'tm': tm, 'avg_14': avg_14, 'stdev_14': stdev_14,
                         'avg_30': avg_30, 'stdev_30': stdev_30,
-                        'high':high, 'low':low, 'N':N}
+                        'high':high, 'low':low, 'N':N, 'count_high': count_high,
+                        'count_low': count_low}
 
         return render_to_response('bloodsugar/index.html', context_dict, context)
 
