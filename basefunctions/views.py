@@ -43,11 +43,13 @@ def robots(request):
 # so i need to clean the ?next= url when getting user data
 def user_login(request):
     context = RequestContext(request)
+    refer = request.META.get('HTTP_REFERER')
+    refer = '/'+'/'.join(str(refer).split('/')[3:])
 
     if request.GET:
         nxt = request.GET['next']
     else:
-        nxt=None
+        nxt=refer
 
     if request.method == "POST":
         username = request.POST['username']
@@ -56,12 +58,13 @@ def user_login(request):
             nxt = request.POST['next']
             print "assigned " + str(nxt)
         else:
-            nxt = '/'
+            nxt = refer
         user = authenticate(username=username, password=password)
 
         if user is not None:
             if user.is_active:
                 login(request, user)
+                print "NEXT:",
                 print nxt
                 if nxt == 'None':
                     return HttpResponseRedirect('/')
@@ -79,8 +82,11 @@ def user_login(request):
 # Logout View
 @login_required
 def user_logout(request):
+    refer = request.META.get('HTTP_REFERER')
+    refer = '/'+'/'.join(str(refer).split('/')[3:])
+
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(refer)
 
 
 # this is to serve secure content
