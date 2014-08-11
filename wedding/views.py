@@ -14,6 +14,20 @@ def root(request):
 
 
 @login_required
+def gallery_pic(request, gallery_name, pic_name):
+    context = RequestContext(request)
+    context_dict = {}
+    try:
+        pic = PictureEntry.objects.get(pic_name=pic_name)
+        context_dict['pic_name'] = pic.pic_name
+        context_dict['caption'] = pic.caption
+    except ObjectDoesNotExist:
+        return render_to_response('404.html', context_dict, context)
+
+    return render_to_response('wedding/pictemplate.html', context_dict, context)
+
+
+@login_required
 def gallery(request, page_num=1):
     context = RequestContext(request)
     context_dict = {}

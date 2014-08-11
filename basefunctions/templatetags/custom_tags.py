@@ -14,7 +14,7 @@ def file_url(context, filename=None):
 
 
 @register.simple_tag(takes_context=True)
-def secure_file(context, filename=None, alt_text=None, class_string=None):
+def secure_file(context, filename=None, alt_text=None, class_string=None, gallery_name = None):
 
     html_string = ''
     if context['user_authenticated']:
@@ -24,7 +24,10 @@ def secure_file(context, filename=None, alt_text=None, class_string=None):
             if class_string:
                 html_string += "class=" + class_string + " "
 
-            html_string += "src='" + os.path.join(SECURE_FILE_URL, filename)
+            if gallery_name:
+                html_string += "src='" + os.path.join(SECURE_FILE_URL, gallery_name, filename)
+            else:
+                html_string += "src='" + os.path.join(SECURE_FILE_URL, filename)
 
             if alt_text:
                 html_string += "' alt='" + alt_text
