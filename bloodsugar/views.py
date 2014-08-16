@@ -57,6 +57,8 @@ def root(request):
                 avg_30 = sum()/30
                 stdev_30 = int(std(rd))
 
+            all_avg = sum(all_entries)/len(all_entries)
+            all_stdev = int(std(all_entries))
             x_axis = [x.entry_time for x in all_entries]
             y_axis = [x.reading for x in all_entries]
             high = max(y_axis)
@@ -83,15 +85,16 @@ def root(request):
         context_dict = {'last_reading': last_reading,
                         'tm': tm, 'avg_14': avg_14, 'stdev_14': stdev_14,
                         'avg_30': avg_30, 'stdev_30': stdev_30,
-                        'high':high, 'low':low, 'N':N, 'count_high': count_high,
-                        'count_low': count_low}
+                        'high': high, 'low': low, 'N': N, 'count_high': count_high,
+                        'count_low': count_low, 'all_avg': all_avg, 'all_stdev': all_stdev}
 
         return render_to_response('bloodsugar/index.html', context_dict, context)
+
 
 # Send all sugars in csv text format
 @login_required
 def data(request):
-    context = RequestContext(request)
+    # context = RequestContext(request)
     try:
         entries = BloodSugarEntry.objects.all()
     except ObjectDoesNotExist:
@@ -100,13 +103,14 @@ def data(request):
     output = []
     output.append("entry_time, reading, \n")
     for v in entries:
-        output.append(str(v.entry_time) + ","+ str(v.reading) + ",\n")
+        output.append(str(v.entry_time) + "," + str(v.reading) + ",\n")
     resp = ''.join(output)
 
     return HttpResponse(resp, content_type="text/csv")
 
+
 def sugar_chart(x_axis, y_axis):
-    plot_date(x_axis,y_axis, linestyle='--')
+    plot_date(x_axis, y_axis, linestyle='--')
 
     xlabel('entry time')
     ylabel('blood sugar')
